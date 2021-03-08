@@ -19,11 +19,13 @@ A + B * C + D  -->  A B + C D + *
 ## Try it yourself
 There is simple main program, that calculates infix expressions  
 To use it:
-- ```go bulid main.go```
-- ```./main "[ infix expresion ]"```  
+```shell
+> go bulid main.go
+> ./main "[ infix expresion ]"
+```  
 **Note**: each operator and operant must separated by one space
 #### Usage example:
-```
-$> ./main 200 / (5 * 2)
-$> 20 
+```shell
+> ./main 200 / (5 * 2)
+  20 
 ```
