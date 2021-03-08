@@ -26,6 +26,10 @@ To use it:
 **Note**: each operator and operant must separated by one space
 #### Usage example:
 ```shell
-> ./main 200 / (5 * 2)
+> ./main "200 / (5 * 2)"
   20 
+```
+```shell
+> ./main "( ( 5 + 185 ) * 756 ) / ( 125 - 11 ) + 4 - ( 21 / 7 )"
+  1261 
 ```
