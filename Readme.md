@@ -7,10 +7,12 @@ See also [Infix, Postfix and Prefix expressions](http://www.cs.man.ac.uk/~pjj/cs
 ## Examples
 ### Infix to Postfix:
 ```golang
-A + B => A B +  
-C / ( A + B ) => C A B + /  
-A + B * C + D => A B + C D + *
+A + B  -->  A B +  
+C / ( A + B )  -->  C A B + /  
+A + B * C + D  -->  A B + C D + *
 ```
 ### Postfix calculation:
-```5 3 +``` = ```7```
-```9 2 1 + /``` = ```3```
+```golang
+5 3 +  ==  7  
+9 2 1 + /  ==  3
+```
