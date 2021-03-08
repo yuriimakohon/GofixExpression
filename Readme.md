@@ -16,3 +16,14 @@ A + B * C + D  -->  A B + C D + *
 5 3 +  =  7  
 9 2 1 + /  =  3
 ```
+## Try it yourself
+There is simple main program, that calculates infix expressions  
+To use it:
+- ```go bulid main.go```
+- ```./main "[ infix expresion ]"```
+**Note**: each operator and operant must separated by one space
+### Usage example:
+```
+$> ./main 200 / (5 * 2)
+$> 20 
+```
