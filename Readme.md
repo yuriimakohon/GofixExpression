@@ -13,6 +13,6 @@ A + B * C + D  -->  A B + C D + *
 ```
 ### Postfix calculation:
 ```golang
-5 3 +  ==  7  
-9 2 1 + /  ==  3
+5 3 +  =  7  
+9 2 1 + /  =  3
 ```
