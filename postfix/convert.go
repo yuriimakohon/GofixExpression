@@ -14,8 +14,9 @@ var (
 		'-': 2,
 		'(': 1,
 	}
-	operandPattern  = `^[A-Za-z0-9]*$`
-	operatorPattern = `^[()/*+-]$`
+
+	operatorRegexp = regexp.MustCompile(`^[()/*+-]$`)
+	operandRegexp  = regexp.MustCompile(`^[A-Za-z0-9]*$`)
 )
 
 func pushOperator(stack *stack.Stack, operator byte, resList *[]string) error {
@@ -46,9 +47,6 @@ func pushOperator(stack *stack.Stack, operator byte, resList *[]string) error {
 }
 
 func InfixToPostfix(infix string) (string, error) {
-	operatorRegexp := regexp.MustCompile(operatorPattern)
-	operandRegexp := regexp.MustCompile(operandPattern)
-
 	tokens := strings.Split(infix, " ")
 	operatorStack := stack.New()
 
