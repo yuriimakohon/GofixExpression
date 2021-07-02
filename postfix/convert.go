@@ -1,50 +1,11 @@
 package postfix
 
 import (
-	"github.com/golang-collections/collections/stack"
 	"regexp"
 	"strings"
+
+	"github.com/golang-collections/collections/stack"
 )
-
-var (
-	prec = map[byte]uint8{
-		'*': 3,
-		'/': 3,
-		'+': 2,
-		'-': 2,
-		'(': 1,
-	}
-
-	operatorRegexp = regexp.MustCompile(`^[()/*+-]$`)
-	operandRegexp  = regexp.MustCompile(`^[A-Za-z0-9]*$`)
-)
-
-func pushOperator(stack *stack.Stack, operator byte, resList *[]string) error {
-	switch operator {
-	case '(':
-		stack.Push(operator)
-	case ')':
-		{
-			for curr := stack.Pop(); ; curr = stack.Pop() {
-				if curr == nil {
-					return ErrParenthesesSeq
-				}
-				if curr.(byte) == '(' {
-					break
-				}
-				*resList = append(*resList, string(curr.(byte)))
-			}
-		}
-	default:
-		{
-			for stack.Len() > 0 && prec[stack.Peek().(byte)] >= prec[operator] {
-				*resList = append(*resList, string(stack.Pop().(byte)))
-			}
-			stack.Push(operator)
-		}
-	}
-	return nil
-}
 
 func InfixToPostfix(infix string) (string, error) {
 	tokens := strings.Split(infix, " ")
@@ -72,4 +33,40 @@ func InfixToPostfix(infix string) (string, error) {
 	}
 
 	return strings.Join(resList, " "), nil
+}
+
+var (
+	prec = map[byte]uint8{
+		'*': 3,
+		'/': 3,
+		'+': 2,
+		'-': 2,
+		'(': 1,
+	}
+
+	operatorRegexp = regexp.MustCompile(`^[()/*+-]$`)
+	operandRegexp  = regexp.MustCompile(`^[A-Za-z0-9]*$`)
+)
+
+func pushOperator(stack *stack.Stack, operator byte, resList *[]string) error {
+	switch operator {
+	case '(':
+		stack.Push(operator)
+	case ')':
+		for curr := stack.Pop(); ; curr = stack.Pop() {
+			if curr == nil {
+				return ErrParenthesesSeq
+			}
+			if curr.(byte) == '(' {
+				break
+			}
+			*resList = append(*resList, string(curr.(byte)))
+		}
+	default:
+		for stack.Len() > 0 && prec[stack.Peek().(byte)] >= prec[operator] {
+			*resList = append(*resList, string(stack.Pop().(byte)))
+		}
+		stack.Push(operator)
+	}
+	return nil
 }

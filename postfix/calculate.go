@@ -1,9 +1,10 @@
 package postfix
 
 import (
-	"github.com/golang-collections/collections/stack"
 	"strconv"
 	"strings"
+
+	"github.com/golang-collections/collections/stack"
 )
 
 func doMath(stack *stack.Stack, op byte) error {
